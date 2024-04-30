@@ -1,0 +1,69 @@
+.status_overview_card {
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+@media screen and (min-width: 600px) {
+  .status_overview_card {
+    gap: 7px;
+  }
+}
+
+.total_status_card {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (min-width: 600px) {
+  .total_status_card {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+.todo_card {
+  background-color: var(--accent_secondary);
+}
+
+.in_progress_card {
+  background-color: var(--accent_primary);
+}
+
+.completed_card {
+  background-color: var(--accent_third);
+}
+
+.total_status {
+  color: var(--text_color_primary);
+  font-family: var(--ff_secondary);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0px;
+}
+@media screen and (min-width: 600px) {
+  .total_status {
+    font-size: 17px;
+  }
+}
+
+.status_overview_title {
+  color: var(--text_color_primary);
+  font-family: var(--ff_secondary);
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0px;
+}
+@media screen and (min-width: 600px) {
+  .status_overview_title {
+    font-size: 17px;
+    letter-spacing: 0.7px;
+  }
+}

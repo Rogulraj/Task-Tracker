@@ -1,0 +1,236 @@
+.main_layout {
+  min-height: 100vh;
+  background-color: var(--bg_primary);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.text_content_container {
+  height: auto;
+  width: 100%;
+  padding: 10px 15px;
+}
+
+.content_calender_card {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 900px) {
+  .content_calender_card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+}
+
+.content_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting_text {
+  color: var(--text_color_primary);
+  font-size: 20px;
+  font-family: var(--ff_primary);
+  font-weight: 600;
+  margin: 0px;
+}
+@media screen and (min-width: 600px) {
+  .greeting_text {
+    margin-top: 25px;
+    font-size: 25px;
+  }
+}
+
+.task_overview_card {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.sm_calender_card {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.sm_calender_icon {
+  display: block;
+}
+@media screen and (min-width: 900px) {
+  .sm_calender_icon {
+    display: none;
+  }
+}
+
+.sm_calender {
+  position: absolute;
+  top: 30px;
+  right: 0px;
+}
+@media screen and (min-width: 900px) {
+  .sm_calender {
+    display: none !important;
+  }
+}
+
+.sm_date_picker {
+  background-color: var(--white);
+  border-radius: 20px;
+  max-width: 300px;
+}
+
+.task_overview_title {
+  color: var(--text_color_secondary);
+  font-size: 15px;
+  font-family: var(--ff_primary);
+  font-weight: 600;
+  margin: 0px;
+}
+@media screen and (min-width: 600px) {
+  .task_overview_title {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 900px) {
+  .task_overview_title {
+    margin-top: 30px;
+  }
+}
+
+.status_list_card {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 2px;
+}
+
+.md_calender {
+  display: none;
+}
+@media screen and (min-width: 900px) {
+  .md_calender {
+    display: block;
+  }
+}
+
+.md_date_picker {
+  background-color: var(--white);
+  border-radius: 20px;
+  max-height: 300px !important;
+}
+
+.status_btn_container {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+@media screen and (min-width: 600px) {
+  .status_btn_container {
+    margin-top: 40px;
+    gap: 20px;
+  }
+}
+@media screen and (min-width: 900px) {
+  .status_btn_container {
+    margin-top: 40px;
+  }
+}
+
+.task_status_list_container {
+  list-style-type: none;
+  padding: 0px;
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+@media screen and (min-width: 600px) {
+  .task_status_list_container {
+    gap: 20px;
+  }
+}
+@media screen and (min-width: 900px) {
+  .task_status_list_container {
+    gap: 25px;
+  }
+}
+@media screen and (min-width: 600px) {
+  .task_status_list_container {
+    gap: 30px;
+  }
+}
+
+.task_status_item_card {
+  height: 200px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.new_task_btn_card {
+  height: 50px;
+  width: 50px;
+  background-color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  left: 100%;
+  bottom: 40px;
+  cursor: pointer;
+}
+@media screen and (min-width: 600px) {
+  .new_task_btn_card {
+    height: 55px;
+    width: 55px;
+  }
+}
+@media screen and (min-width: 900px) {
+  .new_task_btn_card {
+    height: 60px;
+    width: 60px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .new_task_btn_card {
+    height: 70px;
+    width: 70px;
+  }
+}
+
+.plus_icon {
+  color: var(--black);
+  height: 18px;
+  width: 18px;
+}
+@media screen and (min-width: 900px) {
+  .plus_icon {
+    height: 20px;
+    width: 20px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .plus_icon {
+    height: 22px;
+    width: 22px;
+  }
+}

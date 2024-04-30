@@ -1,0 +1,43 @@
+.select_card {
+  height: fit-content;
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+
+.select_element {
+  height: 56px;
+  width: 100%;
+  border: solid 1px var(--border_color_primary);
+  border-radius: 12px;
+  outline: none;
+  padding: 15px;
+  appearance: none;
+  position: relative;
+  color: var(--constant_black);
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--ff_primary);
+  background-color: var(--constant_white);
+}
+
+.select_element_secondary {
+  background-color: var(--bg_secondary);
+}
+
+.drop_down_icon {
+  position: absolute;
+  top: 18px;
+  right: 10px;
+  pointer-events: none;
+}
+
+.option_item {
+  color: var(--constant_black);
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--ff_primary);
+}
+.span_option_text {
+  font-size: 15px;
+}

@@ -1,0 +1,129 @@
+.form_layout {
+  height: 100%;
+  width: 100%;
+}
+
+.input_card {
+  height: auto;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.title_label {
+  color: var(--constant_black);
+  font-size: 16px;
+  font-family: var(--ff_primary);
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.title_input {
+  height: 50px;
+  width: 280px;
+  border: solid 1px var(--border_color_secondary);
+  border-radius: 5px;
+  padding-left: 15px;
+  outline: none;
+  color: var(--constant_black);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.dueto_input input {
+  max-height: 15px;
+  width: 250px;
+}
+
+.tags_input_card {
+  height: 50px;
+  width: 280px;
+  border: solid 1px var(--border_color_secondary);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 15px;
+}
+
+.tags_input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  color: var(--constant_black);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.tags_list_container {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.tag_item_card {
+  height: fit-content;
+  width: fit-content;
+  /* padding: 5px; */
+  border: solid 1px var(--border_color_primary);
+  border-radius: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+}
+
+.tag_text {
+  color: var(--constant_black);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0px;
+}
+
+.select_input_card {
+  width: 280px;
+  margin: 0px;
+  margin-top: -15px;
+}
+
+.about_task_input {
+  height: 200px;
+  width: 280px;
+  border: solid 1px var(--border_color_secondary);
+  border-radius: 5px;
+  outline: none;
+  padding: 15px;
+  color: var(--constant_black);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.validation_error {
+  color: var(--danger);
+  font-size: 17px;
+  font-family: var(--ff_primary);
+  font-weight: 600;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.submit_btn {
+  height: 50px;
+  width: 100%;
+  background-color: var(--accent_primary);
+  margin-top: 20px;
+  color: var(--constant_white);
+  font-size: 15px;
+}

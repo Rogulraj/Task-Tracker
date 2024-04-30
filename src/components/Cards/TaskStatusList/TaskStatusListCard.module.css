@@ -1,0 +1,44 @@
+.main_layout {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg_third);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.status_header_card {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.status_icon {
+  height: 20px;
+  width: 4px;
+  border-radius: 10px;
+}
+
+.status_title {
+  color: var(--text_color_primary);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--ff_primary);
+  margin: 0px;
+}
+
+.todo_bg {
+  background-color: var(--accent_secondary);
+}
+
+.in_progress_bg {
+  background-color: var(--accent_primary);
+}
+
+.completed_bg {
+  background-color: var(--accent_third);
+}
