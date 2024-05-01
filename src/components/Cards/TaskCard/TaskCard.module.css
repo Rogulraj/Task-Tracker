@@ -1,0 +1,144 @@
+.main_layout {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg_secondary);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.dueto_card {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dueto_title {
+  color: var(--text_color_secondary);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 12px;
+  margin: 0px;
+}
+@media screen and (min-width: 600px) {
+  .dueto_title {
+    font-size: 13px;
+  }
+}
+
+.dueto_value {
+  color: var(--text_color_primary);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 12px;
+  margin: 0px;
+}
+
+.task_title {
+  color: var(--text_color_primary);
+  font-family: var(--ff_primary);
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0px;
+  margin-top: 15px;
+}
+@media screen and (min-width: 600px) {
+  .task_title {
+    font-size: 17px;
+  }
+}
+
+.about_task {
+  color: var(--text_color_secondary);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 12px;
+  margin: 0px;
+}
+@media screen and (min-width: 600px) {
+  .about_task {
+    font-size: 13px;
+  }
+}
+
+.tag_title {
+  color: var(--text_color_primary);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 12px;
+  margin: 0px;
+  margin-top: 15px;
+}
+@media screen and (min-width: 600px) {
+  .tag_title {
+    font-size: 13px;
+    margin-top: 20px;
+  }
+}
+
+.tags_list_container {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 5px;
+}
+
+.tag_item_card {
+  height: fit-content;
+  width: fit-content;
+  padding: 2px 10px;
+  border: solid 1px var(--border_color_secondary);
+  border-radius: 50px;
+  background-color: var(--constant_white);
+}
+@media screen and (min-width: 600px) {
+  .tag_item_card {
+    padding: 3px 12px;
+  }
+}
+
+.tag_text {
+  color: var(--constant_black);
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  font-size: 12px;
+  margin: 0px;
+}
+@media screen and (min-width: 600px) {
+  .tag_text {
+    font-size: 13px;
+  }
+}
+
+.update_delete_card {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.update_icon {
+  height: 20px;
+  width: 20px;
+  color: var(--accent_primary);
+  cursor: pointer;
+}
+
+.delete_icon {
+  height: 20px;
+  width: 20px;
+  color: var(--danger);
+  cursor: pointer;
+}

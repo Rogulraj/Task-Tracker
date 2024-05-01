@@ -1,21 +1,24 @@
 // packages
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import Modal from "react-modal";
 
 // css
-import ds from "./CreateTaskModalForm.module.css";
+import ds from "./UpdateTaskModalForm.module.css";
 import { IoClose } from "react-icons/io5";
-import CreateTaskForm from "@components/Forms/CreateTaskForm/CreateTaskForm";
+import UpdateTaskForm from "@components/Forms/UpdateTaskForm/UpdateTaskForm";
+import { TaskListItem } from "@redux/features/task.feature";
 
 // types
-interface CreateTaskModalFormPropsType {
+interface UpdateTaskModalFormPropsType {
   isModal: boolean;
   closeModal: () => void;
+  taskItem: TaskListItem;
 }
 
-const CreateTaskModalForm: FC<CreateTaskModalFormPropsType> = ({
+const UpdateTaskModalForm: FC<UpdateTaskModalFormPropsType> = ({
   closeModal,
   isModal,
+  taskItem,
 }) => {
   useEffect(() => {
     Modal.setAppElement("body");
@@ -45,10 +48,10 @@ const CreateTaskModalForm: FC<CreateTaskModalFormPropsType> = ({
           <h4 className={ds.title}>New Task</h4>
           <IoClose className={ds.close_icon} onClick={() => closeModal()} />
         </div>
-        <CreateTaskForm closeModal={closeModal} />
+        <UpdateTaskForm closeModal={closeModal} taskItem={taskItem} />
       </div>
     </Modal>
   );
 };
 
-export default CreateTaskModalForm;
+export default UpdateTaskModalForm;

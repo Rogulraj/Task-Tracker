@@ -105,6 +105,10 @@
   }
 }
 
+.selected_date_text {
+  font-size: 14px;
+}
+
 .status_list_card {
   height: auto;
   width: 100%;
@@ -129,6 +133,21 @@
   max-height: 300px !important;
 }
 
+.status_btn_title {
+  color: var(--text_color_primary);
+  font-family: var(--ff_primary);
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0px;
+  margin-top: 30px;
+}
+@media screen and (min-width: 600px) {
+  .status_btn_title {
+    font-size: 16px;
+    margin-top: 40px;
+  }
+}
+
 .status_btn_container {
   height: auto;
   width: 100%;
@@ -136,17 +155,12 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 @media screen and (min-width: 600px) {
   .status_btn_container {
-    margin-top: 40px;
+    margin-top: 10px;
     gap: 20px;
-  }
-}
-@media screen and (min-width: 900px) {
-  .status_btn_container {
-    margin-top: 40px;
   }
 }
 
@@ -159,10 +173,12 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 15px;
+  margin-top: 20px;
 }
 @media screen and (min-width: 600px) {
   .task_status_list_container {
     gap: 20px;
+    margin-top: 30px;
   }
 }
 @media screen and (min-width: 900px) {
@@ -170,14 +186,14 @@
     gap: 25px;
   }
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1200px) {
   .task_status_list_container {
     gap: 30px;
   }
 }
 
 .task_status_item_card {
-  height: 200px;
+  height: auto;
   width: 100%;
   max-width: 400px;
   display: flex;

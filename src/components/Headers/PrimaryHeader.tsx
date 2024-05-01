@@ -49,7 +49,7 @@ const PrimaryHeader: FC<PrimaryHeaderPropsType> = ({}) => {
             <NavLink to={routePaths.taskHome} className={ds.sm_nav_item}>
               DashBoard
             </NavLink>
-            <NavLink to={routePaths.taskHome} className={ds.sm_nav_item}>
+            <NavLink to={routePaths.taskAnalytics} className={ds.sm_nav_item}>
               Analytics
             </NavLink>
           </nav>
@@ -62,7 +62,7 @@ const PrimaryHeader: FC<PrimaryHeaderPropsType> = ({}) => {
             <NavLink to={routePaths.taskHome} className={ds.md_nav_item}>
               DashBoard
             </NavLink>
-            <NavLink to={routePaths.taskHome} className={ds.md_nav_item}>
+            <NavLink to={routePaths.taskAnalytics} className={ds.md_nav_item}>
               Analytics
             </NavLink>
             <img src={User1} alt="user-1" className={ds.md_user_image} />
@@ -70,14 +70,6 @@ const PrimaryHeader: FC<PrimaryHeaderPropsType> = ({}) => {
         </div>
       </div>
     </div>
-    // <div className={ds.main}>
-    //   <div className={ds.sub}>
-    //     <div className={ds.inner}>
-    //       <div className={ds.title}></div>
-    //       <div className={ds.content}></div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

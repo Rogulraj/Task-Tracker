@@ -42,3 +42,21 @@
 .completed_bg {
   background-color: var(--accent_third);
 }
+
+.task_list_container {
+  list-style-type: none;
+  padding: 0px;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.task_item_card {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

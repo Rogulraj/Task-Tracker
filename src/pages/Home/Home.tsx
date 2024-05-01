@@ -1,5 +1,5 @@
 // packages
-import React, { FC, useCallback, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 
 import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -20,9 +20,16 @@ import { isTaskStatus } from "@helper/taskStatusFinder";
 import TaskStatusListCard from "@components/Cards/TaskStatusList/TaskStatusListCard";
 import { FaPlus } from "react-icons/fa6";
 import CreateTaskModalForm from "@components/ModalForms/CreateTaskModalForm/CreateTaskModalForm";
+import { useAppSelector } from "@redux/store/store";
 
 // types
 interface HomePropsType {}
+
+interface TodaysTasks {
+  todo: number;
+  inProgress: number;
+  completed: number;
+}
 
 const themeOptions = {
   palette: {
@@ -45,8 +52,14 @@ const Home: FC<HomePropsType> = ({}) => {
     "Completed",
   ]);
   const [showCreateTaskModal, setCreateTaskModal] = useState<boolean>(false);
-  const [showModifyTaskModal, setShowModifyTaskModal] =
-    useState<boolean>(false);
+
+  const [todaysTasks, setTodaysTasks] = useState<TodaysTasks>({
+    todo: 0,
+    completed: 0,
+    inProgress: 0,
+  });
+
+  const { taskList } = useAppSelector((state) => state.task);
 
   /** useCallback Methods */
   const isStatus = useCallback(
@@ -68,6 +81,43 @@ const Home: FC<HomePropsType> = ({}) => {
     [selectedStatus]
   );
 
+  useEffect(() => {
+    const today = selectedDate.startOf("day"); // Get the start of today
+
+    const filteredTasks = taskList.filter((task) => {
+      const dueDate = dayjs(task.dueTo, "MM/DD/YYYY").startOf("day"); // Get the start of the task's due date
+      return dueDate.isSame(today, "day"); // Check if the task's due date is the same as today
+    });
+
+    // Count tasks by status
+    let todoCount = 0;
+    let inProgressCount = 0;
+    let completedCount = 0;
+
+    filteredTasks.forEach((task) => {
+      switch (task.status) {
+        case "Todo":
+          todoCount++;
+          break;
+        case "In Progress":
+          inProgressCount++;
+          break;
+        case "Completed":
+          completedCount++;
+          break;
+        default:
+          break;
+      }
+    });
+
+    // Update state
+    setTodaysTasks({
+      todo: todoCount,
+      inProgress: inProgressCount,
+      completed: completedCount,
+    });
+  }, [taskList, selectedDate]);
+
   return (
     <div className={ds.main_layout}>
       <PrimaryHeader />
@@ -78,7 +128,12 @@ const Home: FC<HomePropsType> = ({}) => {
               <h1 className={ds.greeting_text}>Hello Rogul 👋</h1>
               <div className={ds.task_overview_card}>
                 <div className={ds.sm_calender_card}>
-                  <h3 className={ds.task_overview_title}>Today you have</h3>
+                  <h3 className={ds.task_overview_title}>
+                    <span className={ds.selected_date_text}>
+                      {selectedDate.format("DD-MM-YYYY")}
+                    </span>{" "}
+                    you have
+                  </h3>
                   <FaCalendarAlt
                     color="#fff"
                     size={20}
@@ -100,10 +155,20 @@ const Home: FC<HomePropsType> = ({}) => {
                   </div>
                 </div>
               </div>
+
               <div className={ds.status_list_card}>
-                <TotalTaskStatus taskStatus="Todo" totalTask={3} />
-                <TotalTaskStatus taskStatus="In Progress" totalTask={5} />
-                <TotalTaskStatus taskStatus="Completed" totalTask={4} />
+                <TotalTaskStatus
+                  taskStatus="Todo"
+                  totalTask={todaysTasks.todo}
+                />
+                <TotalTaskStatus
+                  taskStatus="In Progress"
+                  totalTask={todaysTasks.inProgress}
+                />
+                <TotalTaskStatus
+                  taskStatus="Completed"
+                  totalTask={todaysTasks.completed}
+                />
               </div>
             </div>
             <div className={ds.md_calender}>
@@ -119,6 +184,7 @@ const Home: FC<HomePropsType> = ({}) => {
             </div>
           </div>
 
+          <h3 className={ds.status_btn_title}>apply filter</h3>
           <div className={ds.status_btn_container}>
             {taskStatusList.map((item, index) => (
               <PrimaryButton

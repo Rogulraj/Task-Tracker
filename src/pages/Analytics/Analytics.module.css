@@ -1,0 +1,44 @@
+.main_layout {
+  min-height: 100vh;
+  background-color: var(--bg_primary);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.content_container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.status_pie_chart {
+  height: 300px;
+  width: 100%;
+}
+
+.status_pie_chart_title {
+  color: var(--text_color_primary);
+  font-size: 20px;
+  font-family: var(--ff_primary);
+  font-weight: 600;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.status_pie_chart_text {
+  color: var(--text_color_secondary);
+  font-size: 15px;
+  font-family: var(--ff_primary);
+  font-weight: 500;
+  margin: 0px;
+  margin-top: 3px;
+}
+
+.radar_chart {
+  height: 350px;
+  width: 100%;
+  margin-top: 30px;
+}

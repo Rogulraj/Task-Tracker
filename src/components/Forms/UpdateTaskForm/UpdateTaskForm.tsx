@@ -1,12 +1,12 @@
 // packages
-import React, { FC, FormEvent, useState } from "react";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 import * as Yup from "yup";
 
 // css
-import ds from "./CreateTaskForm.module.css";
+import ds from "./UpdateTaskForm.module.css";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
@@ -19,8 +19,9 @@ import { useAppDispatch, useAppSelector } from "@redux/store/store";
 import { TaskListItem, taskActions } from "@redux/features/task.feature";
 
 // types
-interface CreateTaskFormPropsType {
+interface UpdateTaskFormPropsType {
   closeModal?: () => void;
+  taskItem: TaskListItem;
 }
 
 const yupValidationSchema = Yup.object({
@@ -38,7 +39,10 @@ const yupValidationSchema = Yup.object({
     .min(10, "use atleast 10 characters"),
 });
 
-const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
+const UpdateTaskForm: FC<UpdateTaskFormPropsType> = ({
+  closeModal,
+  taskItem,
+}) => {
   const [title, setTitle] = useState<string>("");
   const [dueTo, setDueTo] = useState<Dayjs | null>(dayjs());
   const [tags, setTags] = useState<string[]>([]);
@@ -50,9 +54,9 @@ const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
-  // const { taskList } = useAppSelector((state) => state.task);
+  //   const { taskList } = useAppSelector((state) => state.task);
 
-  // console.log("taskList", taskList);
+  //   console.log("taskList", taskList);
 
   const addTags = (tag: string) => {
     const index = tags.findIndex((item) => item === tag);
@@ -101,21 +105,29 @@ const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
         validationErrorSetter
       );
       const validate = await yupValidation.validate();
-
       if (validate) {
         dispatch(
-          taskActions.addTask({
+          taskActions.updateTask({
             ...validationData,
-            id: crypto.randomUUID(),
+            id: taskItem.id,
           } as TaskListItem)
         );
-        toast.success("Task Added");
+        toast.success("Task Updated");
         if (closeModal) closeModal();
       }
     } catch (error) {
       toast.error("something went wrong!");
     }
   };
+
+  useEffect(() => {
+    setTitle(taskItem.title);
+    setStatus(taskItem.status);
+    setDueTo(dayjs(taskItem.dueTo));
+    setTags(taskItem.tags);
+    setAssignedList(taskItem.assignedList);
+    setAboutTask(taskItem.aboutTask);
+  }, [taskItem]);
 
   return (
     <form className={ds.form_layout} onSubmit={handleFormSubmit}>
@@ -242,4 +254,4 @@ const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
   );
 };
 
-export default CreateTaskForm;
+export default UpdateTaskForm;
