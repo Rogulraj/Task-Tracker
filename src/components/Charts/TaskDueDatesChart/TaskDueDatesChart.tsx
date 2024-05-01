@@ -1,3 +1,4 @@
+import { TaskModel } from "@models/task.model";
 import React, { useMemo } from "react";
 import {
   BarChart,
@@ -10,20 +11,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-interface Task {
-  id: string;
-  aboutTask: string;
-  assignedList: string[];
-  dueTo: string;
-  status: string;
-  tags: string[];
-  title: string;
+interface ChartProps {
+  data: TaskModel[];
+  variant: "barchart" | "linechart";
 }
 
-const TaskDueDatesChart: React.FC<{
-  data: Task[];
-  varinat: "barchart" | "linechart";
-}> = ({ data, varinat }) => {
+const TaskDueDatesChart: React.FC<ChartProps> = ({ data, variant }) => {
   const dueDatesByMonth = data.reduce(
     (acc: { [key: number]: number[] }, task) => {
       const month = new Date(task.dueTo).getMonth() + 1; // Assuming month starts from 1
@@ -52,7 +45,7 @@ const TaskDueDatesChart: React.FC<{
   );
 
   const findVarinat = useMemo(() => {
-    switch (varinat) {
+    switch (variant) {
       case "barchart":
         return (
           <ResponsiveContainer height={"100%"} width={"100%"}>
@@ -86,7 +79,7 @@ const TaskDueDatesChart: React.FC<{
       default:
         return null;
     }
-  }, [varinat, data]);
+  }, [variant, data]);
 
   return findVarinat;
 };

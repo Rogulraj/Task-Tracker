@@ -11,17 +11,19 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import SelectInput from "@components/Elements/SelectInput/SelectInput";
-import { taskStatusList } from "@constants/taskStatus";
+import { TaskStatusType, taskStatusList } from "@constants/taskStatus";
 import { YupFormValidator } from "@utils/yupFormValidator";
 import { toast } from "sonner";
 import PrimaryButton from "@components/Elements/Buttons/PrimaryButton/PrimaryButton";
 import { useAppDispatch, useAppSelector } from "@redux/store/store";
 import { TaskListItem, taskActions } from "@redux/features/task.feature";
+import { TaskModel } from "@models/task.model";
+import { useUpdateTaskByIdMutation } from "@services/task.service";
 
 // types
 interface UpdateTaskFormPropsType {
   closeModal?: () => void;
-  taskItem: TaskListItem;
+  taskItem: TaskModel;
 }
 
 const yupValidationSchema = Yup.object({
@@ -58,6 +60,8 @@ const UpdateTaskForm: FC<UpdateTaskFormPropsType> = ({
 
   //   console.log("taskList", taskList);
 
+  const [UpdateTask] = useUpdateTaskByIdMutation();
+
   const addTags = (tag: string) => {
     const index = tags.findIndex((item) => item === tag);
     if (index === -1 && tag.length > 0) {
@@ -93,9 +97,9 @@ const UpdateTaskForm: FC<UpdateTaskFormPropsType> = ({
     try {
       const validationData = {
         title,
-        dueTo: dueTo?.format("MM/DD/YYYY"),
+        dueTo: dueTo?.format("MM/DD/YYYY") as string,
         aboutTask,
-        status,
+        status: status as TaskStatusType,
         tags,
         assignedList,
       };
@@ -106,12 +110,17 @@ const UpdateTaskForm: FC<UpdateTaskFormPropsType> = ({
       );
       const validate = await yupValidation.validate();
       if (validate) {
-        dispatch(
-          taskActions.updateTask({
-            ...validationData,
-            id: taskItem.id,
-          } as TaskListItem)
-        );
+        // dispatch(
+        //   taskActions.updateTask({
+        //     ...validationData,
+        //     id: taskItem.id,
+        //   } as TaskListItem)
+        // );
+
+        await UpdateTask({
+          taskId: taskItem._id as string,
+          task: validationData,
+        });
         toast.success("Task Updated");
         if (closeModal) closeModal();
       }

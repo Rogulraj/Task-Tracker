@@ -7,7 +7,7 @@ import ds from "./PrimaryHeader.module.css";
 // icons
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { routePaths } from "@constants/routesPath";
 
 // assets
@@ -19,12 +19,18 @@ interface PrimaryHeaderPropsType {}
 const PrimaryHeader: FC<PrimaryHeaderPropsType> = ({}) => {
   /** state */
   const [showMenu, setShowMenu] = useState<boolean>(false);
+
+  /** router-dom */
+  const navigate = useNavigate();
+
   return (
     <div className={ds.main_layout}>
       <div className={ds.sub_layout}>
         <div className={ds.sm_container}>
           <div className={ds.sm_title_card}>
-            <h1 className={ds.sm_title_text}>
+            <h1
+              className={ds.sm_title_text}
+              onClick={() => navigate(routePaths.taskHome)}>
               Task <br /> Tracker
             </h1>
           </div>
@@ -56,7 +62,11 @@ const PrimaryHeader: FC<PrimaryHeaderPropsType> = ({}) => {
         </div>
         <div className={ds.md_container}>
           <div className={ds.md_title_container}>
-            <h1 className={ds.md_title_text}>Task Tracker</h1>
+            <h1
+              className={ds.md_title_text}
+              onClick={() => navigate(routePaths.taskHome)}>
+              Task Tracker
+            </h1>
           </div>
           <nav className={ds.md_nav_container}>
             <NavLink to={routePaths.taskHome} className={ds.md_nav_item}>

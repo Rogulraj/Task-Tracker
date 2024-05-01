@@ -7,12 +7,13 @@ import ds from "./UpdateTaskModalForm.module.css";
 import { IoClose } from "react-icons/io5";
 import UpdateTaskForm from "@components/Forms/UpdateTaskForm/UpdateTaskForm";
 import { TaskListItem } from "@redux/features/task.feature";
+import { TaskModel } from "@models/task.model";
 
 // types
 interface UpdateTaskModalFormPropsType {
   isModal: boolean;
   closeModal: () => void;
-  taskItem: TaskListItem;
+  taskItem: TaskModel;
 }
 
 const UpdateTaskModalForm: FC<UpdateTaskModalFormPropsType> = ({

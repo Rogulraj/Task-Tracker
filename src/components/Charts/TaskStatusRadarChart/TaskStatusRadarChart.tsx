@@ -1,3 +1,4 @@
+import { TaskModel } from "@models/task.model";
 import React from "react";
 import {
   Radar,
@@ -7,18 +8,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-interface Task {
-  id: string;
-  aboutTask: string;
-  assignedList: string[];
-  dueTo: string;
-  status: "Todo" | "In Progress" | "Completed";
-  tags: string[];
-  title: string;
-}
-
 interface Props {
-  data: Task[];
+  data: TaskModel[];
 }
 
 const TaskStatusRadarChart: React.FC<Props> = ({ data }) => {

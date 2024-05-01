@@ -11,12 +11,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import SelectInput from "@components/Elements/SelectInput/SelectInput";
-import { taskStatusList } from "@constants/taskStatus";
+import { TaskStatusType, taskStatusList } from "@constants/taskStatus";
 import { YupFormValidator } from "@utils/yupFormValidator";
 import { toast } from "sonner";
 import PrimaryButton from "@components/Elements/Buttons/PrimaryButton/PrimaryButton";
 import { useAppDispatch, useAppSelector } from "@redux/store/store";
 import { TaskListItem, taskActions } from "@redux/features/task.feature";
+import { useAddTaskMutation } from "@services/task.service";
+import { TaskModel } from "@models/task.model";
 
 // types
 interface CreateTaskFormPropsType {
@@ -50,9 +52,11 @@ const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
-  // const { taskList } = useAppSelector((state) => state.task);
 
-  // console.log("taskList", taskList);
+  const [AddTask, { data: addTaskResponse, isError: isAddTaskResponseError }] =
+    useAddTaskMutation();
+
+  console.log(addTaskResponse, isAddTaskResponseError);
 
   const addTags = (tag: string) => {
     const index = tags.findIndex((item) => item === tag);
@@ -87,11 +91,11 @@ const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
   const handleFormSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
     try {
-      const validationData = {
+      const validationData: TaskModel = {
         title,
-        dueTo: dueTo?.format("MM/DD/YYYY"),
+        dueTo: dueTo?.format("MM/DD/YYYY") as string,
         aboutTask,
-        status,
+        status: status as TaskStatusType,
         tags,
         assignedList,
       };
@@ -103,12 +107,13 @@ const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
       const validate = await yupValidation.validate();
 
       if (validate) {
-        dispatch(
-          taskActions.addTask({
-            ...validationData,
-            id: crypto.randomUUID(),
-          } as TaskListItem)
-        );
+        // dispatch(
+        //   taskActions.addTask({
+        //     ...validationData,
+        //     id: crypto.randomUUID(),
+        //   } as TaskListItem)
+        // );
+        await AddTask({ task: validationData });
         toast.success("Task Added");
         if (closeModal) closeModal();
       }

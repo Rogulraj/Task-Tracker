@@ -6,6 +6,8 @@ import ds from "./TaskStatusListCard.module.css";
 import { TaskStatusType } from "@constants/taskStatus";
 import { useAppSelector } from "@redux/store/store";
 import TaskCard from "../TaskCard/TaskCard";
+import { useGetAllTasksQuery } from "@services/task.service";
+import { TaskModel } from "@models/task.model";
 
 // types
 interface TaskStatusListCardPropsType {
@@ -15,9 +17,13 @@ interface TaskStatusListCardPropsType {
 const TaskStatusListCard: FC<TaskStatusListCardPropsType> = ({
   taskStatus,
 }) => {
-  const { taskList } = useAppSelector((state) => state.task);
+  const { data: taskData } = useGetAllTasksQuery("");
 
   /** useMemo Methods */
+  const taskList: TaskModel[] = useMemo(() => {
+    return taskData?.data || [];
+  }, [taskData]);
+
   const findIconBg = useMemo(() => {
     switch (taskStatus) {
       case "Todo":

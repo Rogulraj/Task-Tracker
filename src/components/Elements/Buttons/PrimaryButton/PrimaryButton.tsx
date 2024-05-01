@@ -24,10 +24,12 @@ const PrimaryButton: FC<PrimaryButtonPropsType> = ({
   onClickFn,
 }) => {
   const Button = useMemo(() => {
+    console.log(className);
     switch (variant) {
       case "fill":
         return (
           <button
+            style={style}
             onClick={onClickFn}
             type={type}
             className={`${ds.btn_style} ${ds.btn_fill} ${className}`}>
@@ -37,6 +39,7 @@ const PrimaryButton: FC<PrimaryButtonPropsType> = ({
       case "outline":
         return (
           <button
+            style={style}
             onClick={onClickFn}
             type={type}
             className={`${ds.btn_style} ${ds.btn_outline} ${className}`}>

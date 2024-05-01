@@ -21,6 +21,9 @@ import TaskStatusListCard from "@components/Cards/TaskStatusList/TaskStatusListC
 import { FaPlus } from "react-icons/fa6";
 import CreateTaskModalForm from "@components/ModalForms/CreateTaskModalForm/CreateTaskModalForm";
 import { useAppSelector } from "@redux/store/store";
+import { useGetAllTasksQuery } from "@services/task.service";
+import { TaskModel } from "@models/task.model";
+import CustomHelmet from "@components/Elements/CustomHelmet/CustomHelmet";
 
 // types
 interface HomePropsType {}
@@ -59,7 +62,13 @@ const Home: FC<HomePropsType> = ({}) => {
     inProgress: 0,
   });
 
-  const { taskList } = useAppSelector((state) => state.task);
+  // const { taskList } = useAppSelector((state) => state.task);
+
+  const { data: taskData } = useGetAllTasksQuery("");
+  const taskList: TaskModel[] = useMemo(() => {
+    return taskData?.data || [];
+  }, [taskData]);
+  // console.log(taskList1?.data, taskListError1);
 
   /** useCallback Methods */
   const isStatus = useCallback(
@@ -120,6 +129,7 @@ const Home: FC<HomePropsType> = ({}) => {
 
   return (
     <div className={ds.main_layout}>
+      <CustomHelmet title="DashBoard" />
       <PrimaryHeader />
       <MaxWidthLayout>
         <div className={ds.text_content_container}>
@@ -192,6 +202,10 @@ const Home: FC<HomePropsType> = ({}) => {
                 key={index}
                 title={item}
                 type="button"
+                style={{
+                  backgroundColor: isStatus(item) ? "#3651d9" : "",
+                  color: isStatus(item) ? "#fff" : "",
+                }}
                 variant={isStatus(item) ? "fill" : "outline"}
               />
             ))}
