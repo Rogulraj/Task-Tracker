@@ -1,9 +1,14 @@
 // packages
-import React, { FC } from "react";
-import { useAppSelector } from "@redux/store/store";
+import React, { FC, useMemo } from "react";
 
 // css
 import ds from "./Analytics.module.css";
+
+// models
+import { TaskModel } from "@models/task.model";
+
+// services
+import { useGetAllTasksQuery } from "@services/task.service";
 
 // components
 import MaxWidthLayout from "@components/Layout/MaxWidthLayout/MaxWidthLayout";
@@ -11,14 +16,20 @@ import PrimaryHeader from "@components/Headers/PrimaryHeader";
 import TaskDueDatesChart from "@components/Charts/TaskDueDatesChart/TaskDueDatesChart";
 import StatusPieChart from "@components/Charts/StatusPieChart/StatusPieChart";
 import TaskStatusRadarChart from "@components/Charts/TaskStatusRadarChart/TaskStatusRadarChart";
+import CustomHelmet from "@components/Elements/CustomHelmet/CustomHelmet";
 
 // types
 interface AnalyticsPropsType {}
 
 const Analytics: FC<AnalyticsPropsType> = ({}) => {
-  const { taskList } = useAppSelector((state) => state.task);
+  const { data: taskData } = useGetAllTasksQuery("");
+  const taskList: TaskModel[] = useMemo(() => {
+    return taskData?.data || [];
+  }, [taskData]);
+
   return (
     <div className={ds.main_layout}>
+      <CustomHelmet title="Analytics" />
       <PrimaryHeader />
       <MaxWidthLayout>
         <div className={ds.content_container}>
@@ -48,10 +59,10 @@ const Analytics: FC<AnalyticsPropsType> = ({}) => {
             tasks.
           </p>
           <div className={ds.radar_chart}>
-            <TaskDueDatesChart data={taskList} varinat="barchart" />
+            <TaskDueDatesChart data={taskList} variant="barchart" />
           </div>
           <div className={ds.radar_chart}>
-            <TaskDueDatesChart data={taskList} varinat="linechart" />
+            <TaskDueDatesChart data={taskList} variant="linechart" />
           </div>
         </div>
       </MaxWidthLayout>

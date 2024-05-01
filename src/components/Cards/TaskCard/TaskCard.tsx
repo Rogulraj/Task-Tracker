@@ -12,10 +12,12 @@ import UpdateTaskModalForm from "@components/ModalForms/UpdateTaskModalForm/Upda
 import WarningModal from "@components/Modals/WarningModal/WarningModal";
 import { useAppDispatch } from "@redux/store/store";
 import { toast } from "sonner";
+import { TaskModel } from "@models/task.model";
+import { useRemoveTaskByIdMutation } from "@services/task.service";
 
 // types
 interface TaskCardPropsType {
-  taskItem: TaskListItem;
+  taskItem: TaskModel;
 }
 
 const TaskCard: FC<TaskCardPropsType> = ({ taskItem }) => {
@@ -24,9 +26,13 @@ const TaskCard: FC<TaskCardPropsType> = ({ taskItem }) => {
 
   const dispatch = useAppDispatch();
 
+  const [RemoveTask] = useRemoveTaskByIdMutation();
+
   const handleDeleteOk = async (): Promise<void> => {
     try {
-      dispatch(taskActions.removeTask({ id: taskItem.id }));
+      // dispatch(taskActions.removeTask({ id: taskItem.id }));
+
+      await RemoveTask({ taskId: taskItem._id as string });
       toast.success("Task Deleted");
     } catch (error) {
       toast.error("somrthing went wrong!");

@@ -28,6 +28,7 @@ const PrimaryButton: FC<PrimaryButtonPropsType> = ({
       case "fill":
         return (
           <button
+            style={style}
             onClick={onClickFn}
             type={type}
             className={`${ds.btn_style} ${ds.btn_fill} ${className}`}>
@@ -37,6 +38,7 @@ const PrimaryButton: FC<PrimaryButtonPropsType> = ({
       case "outline":
         return (
           <button
+            style={style}
             onClick={onClickFn}
             type={type}
             className={`${ds.btn_style} ${ds.btn_outline} ${className}`}>
