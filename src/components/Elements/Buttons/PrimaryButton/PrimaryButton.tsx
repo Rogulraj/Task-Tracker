@@ -24,7 +24,6 @@ const PrimaryButton: FC<PrimaryButtonPropsType> = ({
   onClickFn,
 }) => {
   const Button = useMemo(() => {
-    console.log(className);
     switch (variant) {
       case "fill":
         return (

@@ -4,21 +4,31 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
 import * as Yup from "yup";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { toast } from "sonner";
 
 // css
 import ds from "./UpdateTaskForm.module.css";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
+// icons
 import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import SelectInput from "@components/Elements/SelectInput/SelectInput";
+
+//constants
 import { TaskStatusType, taskStatusList } from "@constants/taskStatus";
+
+// utils
 import { YupFormValidator } from "@utils/yupFormValidator";
-import { toast } from "sonner";
-import PrimaryButton from "@components/Elements/Buttons/PrimaryButton/PrimaryButton";
-import { useAppDispatch, useAppSelector } from "@redux/store/store";
-import { TaskListItem, taskActions } from "@redux/features/task.feature";
-import { TaskModel } from "@models/task.model";
+
+// services
 import { useUpdateTaskByIdMutation } from "@services/task.service";
+
+// models
+import { TaskModel } from "@models/task.model";
+
+// components
+import SelectInput from "@components/Elements/SelectInput/SelectInput";
+import PrimaryButton from "@components/Elements/Buttons/PrimaryButton/PrimaryButton";
 
 // types
 interface UpdateTaskFormPropsType {
@@ -36,9 +46,7 @@ const yupValidationSchema = Yup.object({
     .of(Yup.string().required("Add User"))
     .min(1, "Add atleast one user"),
   status: Yup.string().required("Please select status"),
-  aboutTask: Yup.string()
-    .required("Enter about task")
-    .min(10, "use atleast 10 characters"),
+  aboutTask: Yup.string().required("Enter about task"),
 });
 
 const UpdateTaskForm: FC<UpdateTaskFormPropsType> = ({
@@ -54,11 +62,6 @@ const UpdateTaskForm: FC<UpdateTaskFormPropsType> = ({
   const [status, setStatus] = useState<string>("");
   const [aboutTask, setAboutTask] = useState<string>("");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
-
-  const dispatch = useAppDispatch();
-  //   const { taskList } = useAppSelector((state) => state.task);
-
-  //   console.log("taskList", taskList);
 
   const [UpdateTask] = useUpdateTaskByIdMutation();
 
@@ -110,13 +113,6 @@ const UpdateTaskForm: FC<UpdateTaskFormPropsType> = ({
       );
       const validate = await yupValidation.validate();
       if (validate) {
-        // dispatch(
-        //   taskActions.updateTask({
-        //     ...validationData,
-        //     id: taskItem.id,
-        //   } as TaskListItem)
-        // );
-
         await UpdateTask({
           taskId: taskItem._id as string,
           task: validationData,

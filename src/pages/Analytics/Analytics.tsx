@@ -1,9 +1,14 @@
 // packages
 import React, { FC, useMemo } from "react";
-import { useAppSelector } from "@redux/store/store";
 
 // css
 import ds from "./Analytics.module.css";
+
+// models
+import { TaskModel } from "@models/task.model";
+
+// services
+import { useGetAllTasksQuery } from "@services/task.service";
 
 // components
 import MaxWidthLayout from "@components/Layout/MaxWidthLayout/MaxWidthLayout";
@@ -11,8 +16,6 @@ import PrimaryHeader from "@components/Headers/PrimaryHeader";
 import TaskDueDatesChart from "@components/Charts/TaskDueDatesChart/TaskDueDatesChart";
 import StatusPieChart from "@components/Charts/StatusPieChart/StatusPieChart";
 import TaskStatusRadarChart from "@components/Charts/TaskStatusRadarChart/TaskStatusRadarChart";
-import { TaskModel } from "@models/task.model";
-import { useGetAllTasksQuery } from "@services/task.service";
 import CustomHelmet from "@components/Elements/CustomHelmet/CustomHelmet";
 
 // types
@@ -56,10 +59,10 @@ const Analytics: FC<AnalyticsPropsType> = ({}) => {
             tasks.
           </p>
           <div className={ds.radar_chart}>
-            <TaskDueDatesChart data={taskList} varinat="barchart" />
+            <TaskDueDatesChart data={taskList} variant="barchart" />
           </div>
           <div className={ds.radar_chart}>
-            <TaskDueDatesChart data={taskList} varinat="linechart" />
+            <TaskDueDatesChart data={taskList} variant="linechart" />
           </div>
         </div>
       </MaxWidthLayout>

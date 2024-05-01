@@ -8,9 +8,6 @@ import { Toaster } from "sonner";
 //redux
 import reduxStore from "@redux/store/store";
 
-// css
-import defaultStyle from "./index.module.css";
-
 // components
 import RotatingLinesLoader from "@components/Loaders/RotatingLine/RotatingLines";
 import CustomErrorBoundary from "@components/Elements/CustomErrorBoundary/CustomErrorBoundary";

@@ -7,3 +7,8 @@ export interface CommonResponse<T> {
 export interface ResponseWithId {
   _id?: string;
 }
+
+export interface TokenData {
+  token: string;
+  expiresIn: number;
+}

@@ -1,20 +1,15 @@
 import { routePaths } from "@constants/routesPath";
 import { RoutePropsType } from "@interfaces/route.interface";
-import Analytics from "@pages/Analytics/Analytics";
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
 // pages
-const Home = lazy(() => import("@pages/Home/Home"));
+const LoginPage = lazy(() => import("@pages/Auth/Login/LoginPage"));
 
-export const taskRoutes: RoutePropsType[] = [
+export const authRoutes: RoutePropsType[] = [
   {
-    path: "home",
-    element: <Home />,
-  },
-  {
-    path: "analytics",
-    element: <Analytics />,
+    path: "login",
+    element: <LoginPage />,
   },
   {
     path: "*",

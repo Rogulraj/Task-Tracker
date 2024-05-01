@@ -3,22 +3,32 @@ import React, { FC, FormEvent, useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs, { Dayjs } from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import * as Yup from "yup";
+import { toast } from "sonner";
 
 // css
 import ds from "./CreateTaskForm.module.css";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
+// icons
 import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import SelectInput from "@components/Elements/SelectInput/SelectInput";
+
+// constants
 import { TaskStatusType, taskStatusList } from "@constants/taskStatus";
+
+// utils
 import { YupFormValidator } from "@utils/yupFormValidator";
-import { toast } from "sonner";
-import PrimaryButton from "@components/Elements/Buttons/PrimaryButton/PrimaryButton";
-import { useAppDispatch, useAppSelector } from "@redux/store/store";
-import { TaskListItem, taskActions } from "@redux/features/task.feature";
+
+// services
 import { useAddTaskMutation } from "@services/task.service";
+
+// models
 import { TaskModel } from "@models/task.model";
+
+// components
+import SelectInput from "@components/Elements/SelectInput/SelectInput";
+import PrimaryButton from "@components/Elements/Buttons/PrimaryButton/PrimaryButton";
 
 // types
 interface CreateTaskFormPropsType {
@@ -35,9 +45,7 @@ const yupValidationSchema = Yup.object({
     .of(Yup.string().required("Add User"))
     .min(1, "Add atleast one user"),
   status: Yup.string().required("Please select status"),
-  aboutTask: Yup.string()
-    .required("Enter about task")
-    .min(10, "use atleast 10 characters"),
+  aboutTask: Yup.string().required("Enter about task"),
 });
 
 const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
@@ -50,8 +58,6 @@ const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
   const [status, setStatus] = useState<string>("");
   const [aboutTask, setAboutTask] = useState<string>("");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
-
-  const dispatch = useAppDispatch();
 
   const [AddTask, { data: addTaskResponse, isError: isAddTaskResponseError }] =
     useAddTaskMutation();
@@ -107,12 +113,6 @@ const CreateTaskForm: FC<CreateTaskFormPropsType> = ({ closeModal }) => {
       const validate = await yupValidation.validate();
 
       if (validate) {
-        // dispatch(
-        //   taskActions.addTask({
-        //     ...validationData,
-        //     id: crypto.randomUUID(),
-        //   } as TaskListItem)
-        // );
         await AddTask({ task: validationData });
         toast.success("Task Added");
         if (closeModal) closeModal();

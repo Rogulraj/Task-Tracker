@@ -30,10 +30,20 @@
   font-weight: 500;
   font-size: 14px;
 }
+@media screen and (min-width: 600px) {
+  .title_input {
+    width: 320px;
+  }
+}
 
 .dueto_input input {
   max-height: 15px;
   width: 250px;
+}
+@media screen and (min-width: 600px) {
+  .dueto_input {
+    width: 320px;
+  }
 }
 
 .tags_input_card {
@@ -45,6 +55,11 @@
   flex-direction: row;
   align-items: center;
   padding: 0px 15px;
+}
+@media screen and (min-width: 600px) {
+  .tags_input_card {
+    width: 320px;
+  }
 }
 
 .tags_input {
@@ -96,6 +111,11 @@
   margin: 0px;
   margin-top: -15px;
 }
+@media screen and (min-width: 600px) {
+  .select_input_card {
+    width: 320px;
+  }
+}
 
 .about_task_input {
   height: 200px;
@@ -108,6 +128,11 @@
   font-family: var(--ff_primary);
   font-weight: 500;
   font-size: 15px;
+}
+@media screen and (min-width: 600px) {
+  .about_task_input {
+    width: 320px;
+  }
 }
 
 .validation_error {
@@ -127,4 +152,9 @@
   color: var(--constant_white);
   font-size: 15px;
   cursor: pointer;
+}
+@media screen and (min-width: 600px) {
+  .submit_btn {
+    width: 320px;
+  }
 }

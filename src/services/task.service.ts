@@ -1,9 +1,16 @@
-import { VITE_API_BASE_URL, VITE_API_PORT } from "@config/index";
-import { CommonResponse, ResponseWithId } from "@interfaces/index";
-import { TaskModel } from "@models/task.model";
+// packages
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl = `${VITE_API_BASE_URL}:${VITE_API_PORT}/api/v1/task`;
+// interfaces
+import { CommonResponse, ResponseWithId } from "@interfaces/index";
+
+// models
+import { TaskModel } from "@models/task.model";
+
+// config
+import { VITE_API_BASE_URL, VITE_API_PORT } from "@config/index";
+
+const baseUrl = `${VITE_API_BASE_URL}/api/v1/task`;
 
 export const taskApi = createApi({
   reducerPath: "taskApi",

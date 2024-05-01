@@ -1,28 +1,37 @@
 // packages
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
-
 import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import { ThemeProvider, createTheme } from "@mui/material";
 
 // css
 import ds from "./Home.module.css";
+
+// icons
+import { FaCalendarAlt } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+
+// constants
+import { TaskStatusType, taskStatusList } from "@constants/taskStatus";
+
+// helper
+import { isTaskStatus } from "@helper/taskStatusFinder";
+
+// services
+import { useGetAllTasksQuery } from "@services/task.service";
+
+// models
+import { TaskModel } from "@models/task.model";
+
+// components
 import PrimaryHeader from "@components/Headers/PrimaryHeader";
 import MaxWidthLayout from "@components/Layout/MaxWidthLayout/MaxWidthLayout";
 import TotalTaskStatus from "@components/Cards/TotalTaskStatus/TotalTaskStatus";
-
-import { FaCalendarAlt } from "react-icons/fa";
-import { ThemeProvider, createTheme } from "@mui/material";
 import PrimaryButton from "@components/Elements/Buttons/PrimaryButton/PrimaryButton";
-import { TaskStatusType, taskStatusList } from "@constants/taskStatus";
-import { isTaskStatus } from "@helper/taskStatusFinder";
 import TaskStatusListCard from "@components/Cards/TaskStatusList/TaskStatusListCard";
-import { FaPlus } from "react-icons/fa6";
 import CreateTaskModalForm from "@components/ModalForms/CreateTaskModalForm/CreateTaskModalForm";
-import { useAppSelector } from "@redux/store/store";
-import { useGetAllTasksQuery } from "@services/task.service";
-import { TaskModel } from "@models/task.model";
 import CustomHelmet from "@components/Elements/CustomHelmet/CustomHelmet";
 
 // types
@@ -55,20 +64,19 @@ const Home: FC<HomePropsType> = ({}) => {
     "Completed",
   ]);
   const [showCreateTaskModal, setCreateTaskModal] = useState<boolean>(false);
-
   const [todaysTasks, setTodaysTasks] = useState<TodaysTasks>({
     todo: 0,
     completed: 0,
     inProgress: 0,
   });
 
-  // const { taskList } = useAppSelector((state) => state.task);
-
+  /** redux api */
   const { data: taskData } = useGetAllTasksQuery("");
+
+  /** useMemos */
   const taskList: TaskModel[] = useMemo(() => {
     return taskData?.data || [];
   }, [taskData]);
-  // console.log(taskList1?.data, taskListError1);
 
   /** useCallback Methods */
   const isStatus = useCallback(
@@ -90,6 +98,7 @@ const Home: FC<HomePropsType> = ({}) => {
     [selectedStatus]
   );
 
+  /** useCallbacks */
   useEffect(() => {
     const today = selectedDate.startOf("day"); // Get the start of today
 
@@ -135,7 +144,9 @@ const Home: FC<HomePropsType> = ({}) => {
         <div className={ds.text_content_container}>
           <div className={ds.content_calender_card}>
             <div className={ds.content_wrapper}>
-              <h1 className={ds.greeting_text}>Hello Rogul 👋</h1>
+              <h1 className={ds.greeting_text}>
+                Hello Rogul 👋, Your Tasks are waiting
+              </h1>
               <div className={ds.task_overview_card}>
                 <div className={ds.sm_calender_card}>
                   <h3 className={ds.task_overview_title}>
