@@ -10,7 +10,7 @@ import { TaskModel } from "@models/task.model";
 // config
 import { VITE_API_BASE_URL, VITE_API_PORT } from "@config/index";
 
-const baseUrl = `${VITE_API_BASE_URL}/api/v1/task`;
+const baseUrl = `${VITE_API_BASE_URL}:${VITE_API_PORT}/api/v1/task`;
 
 export const taskApi = createApi({
   reducerPath: "taskApi",

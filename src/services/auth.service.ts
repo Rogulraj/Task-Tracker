@@ -10,7 +10,7 @@ import { UserModel } from "@models/user.model";
 // config
 import { VITE_API_BASE_URL, VITE_API_PORT } from "@config/index";
 
-const baseUrl = `${VITE_API_BASE_URL}/api/v1/user`;
+const baseUrl = `${VITE_API_BASE_URL}:${VITE_API_PORT}/api/v1/user`;
 
 export const authApis = createApi({
   reducerPath: "authApi",
